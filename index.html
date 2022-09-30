@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="toggle.css"> -->
+</head>
+
+<body>
+
+    <div class="btn" >
+        <button class="btn-limpiar-ls" id="limpiarTodo">Eliminar todos los turnos</button>
+
+        <button class="btn-limpiar-ls" id="limpiar">Eliminar turno</button>
+        <input class="input-eliminar" id="idEliminar" type="number" min="1" max="31">
+        <label class="label-btn-eliminar">Introduzca la fecha que desee elminar</label>
+        <div id="texto">
+            <h3 class="textoToggle">Selector de temas: Theme pink</h3>
+        </div>
+        <div id="container">
+            <div class="toggle" ></div>
+        </div>
+
+    </div>
+
+    <h1 class="titulo">Octubre 2022</h1>
+    <form id="recogerDatos">
+        <div class="formulario">
+
+            <h2>Introduzca sus datos</h2>
+
+            <div class="grupo">
+                <input type="text" id="nombre" required><span class="barra"></span>
+                <label for="">Nombre</label>
+            </div>
+            <div class="grupo">
+                <input type="text" id="apellido" required><span class="barra"></span>
+                <label for="">Apellido</label>
+            </div>
+            <div class="grupo">
+                <input type="number" id="edad" min="1" max="99" maxlength="2" required><span class="barra"></span>
+                <label for="">Edad</label>
+            </div>
+            <div class="grupo">
+                <input type="date" id="fecha" min="2022-10-01" max="2022-10-31" required><span class="barra"></span>
+                <label for="">Fecha</label>
+            </div>
+            <button class="boton-formulario" type="submit" value="Enviar">Solicitar turno</button>
+            <p class="warnings" id="warnings"></p>
+        </div>
+        <div class="cajaMensaje">
+            <div id="mensaje">
+            
+            </div>
+        </div>
+    </form>
+    
+    
+
+
+
+    <div class="calendario">
+        <ol>
+            <div class="dias">
+                <li>Domingo</li>
+                <li>Lunes</li>
+                <li>Martes</li>
+                <li>Miércoles</li>
+                <li>Jueves</li>
+                <li>Viernes</li>
+                <li>Sábado</li>
+            </div>
+            <div class="fechas">
+                <li class="primer-dia">01</li>
+                <li>02</li>
+                <li>03</li>
+                <li>04</li>
+                <li>05</li>
+                <li>06</li>
+                <li>07</li>
+                <li>08</li>
+                <li>09</li>
+                <li>10</li>
+                <li>11</li>
+                <li>12</li>
+                <li>13</li>
+                <li>14</li>
+                <li>15</li>
+                <li>16</li>
+                <li>17</li>
+                <li>18</li>
+                <li>19</li>
+                <li>20</li>
+                <li>21</li>
+                <li>22</li>
+                <li>23</li>
+                <li>24</li>
+                <li>25</li>
+                <li>26</li>
+                <li>27</li>
+                <li>28</li>
+                <li>29</li>
+                <li>30</li>
+                <li>31</li>
+            </div>
+        </ol>
+    </div>
+
+    <footer id="mensajeFinal"></footer>
+
+</body>
+
+<script src="toggle.js"></script>
+<script src="index.js"></script>
+
+</html>
