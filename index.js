@@ -200,7 +200,8 @@ function eventoEliminarTurno() {
     identificador.addEventListener("input", () => { parseInt(identificador.value) })
 
     btnEliminar.onclick = () => {
-        if (identificador.value > 0 && identificador.value <= 31) {
+        funcion(usuario)
+        /*if (identificador.value > 0 && identificador.value <= 31) {
             let comprobar;
             let fechaTomada = Number(identificador.value)
             if (fechaTomada < 10) {
@@ -269,7 +270,7 @@ function eventoEliminarTurno() {
                 confirmButtonText: 'Ok'
             })
             identificador.value = ""
-        }
+        }*/
     }
 
 }
@@ -457,15 +458,17 @@ function ejecutarSubmit() {
 }
 
 // AJAX
-const usuario = { 
+const usuario = {
     nombre: "Luis",
     apellido: "Perez",
     edad: 34,
     fecha: "27/10/2022",
 }
+
 function conectarApi() {
 
     fetch("https://api-coder.onrender.com/api/projects/").then((response) => response.json()).then((data) => {
+    // fetch("http://127.0.0.1:8000/api/projects/").then((response) => response.json()).then((data) => {
 
         for (let dato of data) {
             const { nombre, apellido, edad, fecha, id } = dato
@@ -477,25 +480,43 @@ function conectarApi() {
         }
     })
 
-    
+
 
 }
 
 
 async function funcion(usuario) {
     console.log("funcion post")
-    
-    // console.log(JSON.stringify(usuario))
-    const response = await fetch("https://api-coder.onrender.com/api/projects/", {
-        
+    let jsonListo = JSON.stringify(usuario)
+    console.log(jsonListo)
+    // const response = await fetch("https://api-coder.onrender.com/api/projects/", {
+    // const response = await fetch("http://127.0.0.1:8000/api/projects/", {
+
+    //     method: 'POST',
+    //     mode: 'cors',
+    //     body: JSON.stringify(usuario),
+    //     headers: {
+    //         'Content-type': 'aplication/json; charset=UTF-8',
+    //     }
+
+    // })
+    // .then((response) => response.json()).then((data) => console.log(data))
+    const response = await fetch('https://api-coder.onrender.com/api/projects/', {
+        mode: 'no-cors',
         method: 'POST',
+        // body: JSON.stringify({
+        //     nombre: 'foo',
+        //     apellido: 'bar',
+        //     edad: 1,
+        //     fecha: "13/10/2022"
+        // }),
         body: JSON.stringify(usuario),
         headers: {
-            'Content-type': 'aplication/json; charset=utf-8'
-        }
-
-    }).then((response) => response.json()).then((data) => console.log(data))
-
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+        // .then((response) => response.json())
+        // .then((json) => console.log(json));
 }
 
 
@@ -509,7 +530,7 @@ function main() {
     eventoEliminarTurno()
     eliminarAllTurnos()
     conectarApi()
-    funcion(usuario)
+
 }
 
 main();
