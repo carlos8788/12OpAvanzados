@@ -158,7 +158,7 @@ function ocupado(numero, array, boolTurnosLS) {
     }
 
     else {
-        
+
         Swal.fire({
             title: 'Turno Ocupado',
             text: 'Disculpe este turno ya está ocupado',
@@ -182,14 +182,15 @@ function agregarBoton(id) {
 // Crea el evento onclick que muestra por un alert la información introducida en el formulario
 function agregarAlert(idButton, datos) {
     let agregarAlert = document.getElementById(idButton)
-    agregarAlert.onclick = () => { 
-        
+    agregarAlert.onclick = () => {
+
         Swal.fire({
             title: 'Datos del turno',
             text: datos,
             icon: 'info',
             confirmButtonText: 'Ok'
-        }) }
+        })
+    }
 }
 
 // Función que escucha los eventos del boton eliminar turno y el input correspondiente
@@ -247,7 +248,7 @@ function eventoEliminarTurno() {
 
             }
             else {
-                
+
                 Swal.fire({
                     title: 'No hay turno asignado',
                     text: 'Disculpe no hay un turno en la fecha seleccionada',
@@ -260,7 +261,7 @@ function eventoEliminarTurno() {
 
         }
         else {
-            
+
             Swal.fire({
                 title: 'Selccione un valor',
                 text: 'Por favor selccione un valor entre 1 y 31',
@@ -289,7 +290,7 @@ function eliminarTurno(identificador) {
         let eliminarClase = document.getElementById(`${identificador}`)
         eliminarClase.classList.remove("ocupado")
         identificador.value = ""
-        
+
 
     }
 }
@@ -303,7 +304,7 @@ function eliminarAllTurnos() {
         let ocupados = document.getElementsByClassName("ocupado")
         let arrayId = []
         if (ocupados.length === 0) {
-            
+
             Swal.fire({
                 title: 'No hay turnos asignados',
                 text: 'Disculpe no hay turnos ingresados todavía',
@@ -311,7 +312,7 @@ function eliminarAllTurnos() {
                 confirmButtonText: 'Ok'
             })
         }
-        else{
+        else {
             Swal.fire({
                 title: confirmar,
                 text: "No podrás revertir esto!",
@@ -324,17 +325,17 @@ function eliminarAllTurnos() {
                 if (result.isConfirmed) {
                     for (let t = 0; t < ocupados.length; t++) {
                         let id = ocupados.item(t).id
-    
+
                         ocupados.item(t).innerHTML = `${id}`
-    
+
                         arrayId.push(id)
                     }
                     for (let a = 0; a < arrayId.length; a++) {
-    
+
                         let borrarClase = document.getElementById(arrayId[a])
-            
+
                         borrarClase.classList.remove("ocupado")
-            
+
                     }
                     datos = []
                     Swal.fire(
@@ -343,10 +344,10 @@ function eliminarAllTurnos() {
                         'success'
                     )
                 }
-    
+
             })
         }
-        
+
         actualizarTurnosLS()
 
 
@@ -370,6 +371,7 @@ function agregarAnimacion() {
 function turnoSolicitado(turnoGuardado, datosRecibidos, boolMostrarPersona) {
     let turnoDado = `${turnoGuardado}/10/22`
     let persona = new Persona(turnoGuardado, datosRecibidos[0], datosRecibidos[1], datosRecibidos[2], turnoDado)
+
     datos.push(persona);
 
     if (boolMostrarPersona) {
@@ -449,19 +451,65 @@ function ejecutarSubmit() {
         let verificarFecha = parseInt(data.value.substring(8, 10))
 
         comprobarTurno(verificarFecha)
+        // productos()
     })
 
 }
+
+// AJAX
+const usuario = { 
+    nombre: "Luis",
+    apellido: "Perez",
+    edad: 34,
+    fecha: "27/10/2022",
+}
+function conectarApi() {
+
+    fetch("https://api-coder.onrender.com/api/projects/").then((response) => response.json()).then((data) => {
+
+        for (let dato of data) {
+            const { nombre, apellido, edad, fecha, id } = dato
+            let identificador = parseInt(fecha.substring(0, 2))
+            let lista = [nombre, apellido, edad]
+            // console.log(dato)
+
+            ocupado(identificador, lista, false)
+        }
+    })
+
+    
+
+}
+
+
+async function funcion(usuario) {
+    console.log("funcion post")
+    
+    // console.log(JSON.stringify(usuario))
+    const response = await fetch("https://api-coder.onrender.com/api/projects/", {
+        
+        method: 'POST',
+        body: JSON.stringify(usuario),
+        headers: {
+            'Content-type': 'aplication/json; charset=utf-8'
+        }
+
+    }).then((response) => response.json()).then((data) => console.log(data))
+
+}
+
 
 // Ejecucion de funciones en la función main
 
 function main() {
     asignarID()
     finDeSemana()
-    obtenerTurnosLS()
+    // obtenerTurnosLS()
     ejecutarSubmit()
     eventoEliminarTurno()
     eliminarAllTurnos()
+    conectarApi()
+    funcion(usuario)
 }
 
 main();
